@@ -15,4 +15,4 @@
 
 ## Documentation
 
-https://gitlab.com/fabilus/frisorhemsida/-/blob/master/documentation.md
+https://github.com/NTI-Gymnasieingenjor/RedCrossAction-Baltic/blob/main/documentation.md
