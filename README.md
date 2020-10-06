@@ -13,6 +13,6 @@
 - All code must pass the respective tests
 - All members in the group must understand the code and approve the push
 
-## Documentation
+## Documentatio
 
 https://github.com/NTI-Gymnasieingenjor/RedCrossAction-Baltic/blob/main/documentation.md
