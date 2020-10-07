@@ -7,15 +7,13 @@ from email.mime.multipart import MIMEMultipart
 port = 465
 
 # The mail you send from
-# sender_email = input("Skriv in din email: ")
 sender_email = ("python.ormar@gmail.com")
 
 # The password associated with the mail you typed in
 password = input("Skriv in ditt lösenord: ")
 
 # The mail you want to send to
-# receiver_email = input("Skriv in din mottagare: ")
-receiver_email = ("fmultibox4@gmail.com")
+receiver_email = ("python.ormar@gmail.com")
 
 # The message you choose to send
 email_message = MIMEMultipart("alternative")
