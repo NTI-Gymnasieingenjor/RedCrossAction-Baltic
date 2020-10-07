@@ -1,5 +1,6 @@
 # Imports mail modules
 import smtplib, ssl
+import csv
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -15,33 +16,35 @@ password = input("Skriv in ditt lösenord: ")
 # The mail you want to send to
 receiver_email = ("python.ormar@gmail.com")
 
+text = """\
+Hej!
+Jag skickade detta meddelande från Python!
+Mvh
+PythonOrmarna
+"""
+
+html="""\
+<html>
+     <head>
+         <meta charset="utf-8">
+     </head>
+     <body>
+         <h1>Hej!</h1>
+         <h2>Jag skickade detta meddelande från Python!</h2>
+        
+         <p>Mvh<br>
+             <strong>PythonOrmarna</strong>
+         </p>
+     </body>
+ </html>
+"""
+
+
 # The message you choose to send
 email_message = MIMEMultipart("alternative")
 email_message["Subject"] = "Hej på dig!"
 email_message["From"] = sender_email
 email_message["To"] = receiver_email
-
-text = """\
-Hej!
-Jag skickade detta meddelande från Python!
-MVH
-PythonOrmarna
-"""
-html = """\
-<html>
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <h1>Hej!</h1>
-        <h2>Jag skickade detta meddelande från Python!</h2>
-        
-        <p>MVH <br>
-            <strong>PythonOrmarna</strong>
-        </p>
-    </body>
-</html>
-"""
 
 # Turn these into plain/html MIMEText objects
 part1 = MIMEText(text, "plain")
@@ -62,8 +65,13 @@ print("Skickar meddelande!")
 with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
     # Logs in to the mail server
     server.login(sender_email, password)
-    # Sends the email
-    server.sendmail(sender_email, receiver_email, email_message.as_string())
+    with open("contacts.csv") as file:
+        reader = csv.reader(file)
+        next(reader)  # Skip header row
+        for email in reader:
+            server.sendmail(sender_email, receiver_email, email_message.as_string())
+            print(f"Sending email...")
+            # Send email here
 
 # Confirmation message
 print("Meddelande skickat!")
