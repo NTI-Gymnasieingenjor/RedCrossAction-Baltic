@@ -1,1 +1,1 @@
-web: gunicorn early-warning-system.wsgi --log-file -
+web: gunicorn early_warning_system:app --log-file -
