@@ -13,8 +13,7 @@ sender_email = ("python.ormar@gmail.com")
 # The password associated with the mail you typed in
 password = input("Skriv in ditt lösenord: ")
 
-# The mail you want to send to
-receiver_email = ("python.ormar@gmail.com")
+mailSent = False
 
 text = """\
 Hej!
@@ -44,7 +43,6 @@ html="""\
 email_message = MIMEMultipart("alternative")
 email_message["Subject"] = "Hej på dig!"
 email_message["From"] = sender_email
-email_message["To"] = receiver_email
 
 # Turn these into plain/html MIMEText objects
 part1 = MIMEText(text, "plain")
@@ -69,9 +67,10 @@ with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
         reader = csv.reader(file)
         next(reader)  # Skip header row
         for email in reader:
-            server.sendmail(sender_email, receiver_email, email_message.as_string())
+            server.sendmail(sender_email, email, email_message.as_string())
             print(f"Sending email...")
             # Send email here
 
 # Confirmation message
 print("Meddelande skickat!")
+mailSent = True
