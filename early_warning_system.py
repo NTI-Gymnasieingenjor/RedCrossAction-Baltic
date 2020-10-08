@@ -13,8 +13,6 @@ sender_email = ("python.ormar@gmail.com")
 # The password associated with the mail you typed in
 password = input("Skriv in ditt lösenord: ")
 
-mailSent = False
-
 text = """\
 Hej!
 Jag skickade detta meddelande från Python!
@@ -73,4 +71,3 @@ with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
 
 # Confirmation message
 print("Meddelande skickat!")
-mailSent = True
