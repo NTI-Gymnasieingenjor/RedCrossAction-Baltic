@@ -7,9 +7,6 @@ from selenium.webdriver.support.ui import Select
 # Creates a variable "options" with the Options() class attributes
 options = webdriver.ChromeOptions()
 
-# Adds the no-sandbox as an argument
-options.add_argument("no-sandbox")
-
 # Adds headless as an argument
 options.add_argument("headless")
 
