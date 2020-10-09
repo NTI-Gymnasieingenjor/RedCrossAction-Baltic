@@ -1,17 +1,11 @@
 # Imports the necessary selenium extension
 import csv
-import os
 import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 
 # Creates a variable "options" with the Options() class attributes
 options = webdriver.ChromeOptions()
-
-parentPath = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
-
-# Variable with path to local crhomedriver
-PATH = "C:\\chromedriver.exe"
 
 # Adds the no-sandbox as an argument
 options.add_argument("no-sandbox")
@@ -20,7 +14,7 @@ options.add_argument("no-sandbox")
 options.add_argument("headless")
 
 # Makes the driver variable with respective attributes
-driver = webdriver.Chrome(PATH, options=options)
+driver = webdriver.Chrome(options=options)
 
 
 # Validates Online
