@@ -19,9 +19,6 @@ imap = imaplib.IMAP4_SSL("imap.gmail.com")
 imap.login(username, password)
 status, messages = imap.select("INBOX")
 
-# number of top emails to fetch
-N = 5
-
 # total number of emails
 messages = int(messages[0])
 
@@ -45,15 +42,16 @@ try:
                 # email sender
                 from_ = msg.get("From")
 
-                # date anjd time when the mail was recived
+                # date and time when the mail was recived
                 date = msg["Date"]
 
-                # changes date to local timezone
+                # changes the found date to local timezone
                 tt = parsedate_tz(date)
                 timestamp = mktime_tz(tt)
                 print("\nMail", mail_nr)
                 if from_ == "python.ormar@gmail.com":
                     print("\nDetta mail är från erat säkerhetssystem.")
+                    # prints the time when the mail was sent in local time
                     print("\nDatum:", formatdate(timestamp, True))
                     print("Ämne:", subject)
                     print("Från:", from_)
