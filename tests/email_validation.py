@@ -49,8 +49,8 @@ with open("contacts.csv") as file:
             except:
                 print(email, "is correct\n")
 
-            # Wait for 2 seconds
-            time.sleep(2)
+            # Wait for 3 seconds
+            time.sleep(3)
 
             # Clears input field
             driver.find_element_by_class_name("input").clear()
