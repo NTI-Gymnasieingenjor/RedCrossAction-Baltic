@@ -5,6 +5,10 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import time
+from datetime import datetime
+import sys
+import pytz
+
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
@@ -49,9 +53,16 @@ def main():
     else:
         print('Messages: ')
 
+
         for message in messages[:message_count]:
             msg = service.users().messages().get(userId='me', id=message['id']).execute()
-            print(msg['snippet'])
+            print("="*100)
+            bruh = int(msg['internalDate'])
+            bruh /= 1000
+            print("Datum:", datetime.fromtimestamp(bruh).strftime('%Y-%m-%d %H:%M:%S'))
+
+            print("Medelande:", msg['snippet'])
+
             print("\n")
             time.sleep(2)
 
