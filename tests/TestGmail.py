@@ -1,15 +1,15 @@
 from __future__ import print_function
-import pickle
-import os.path
+from datetime import datetime
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import time
-from datetime import datetime
+import pickle
+import os.path
 import sys
 import pytz
-import base64
 
+# LOGIN ======================================================================
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
@@ -37,36 +37,61 @@ def main():
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
+    # Startar Gmail v1 med den som är inloggad
     service = build('gmail', 'v1', credentials=creds)
+ 
+# ================================================================================== 
 
-    # Call the Gmail API
-    # results = service.users().labels().list(userId='me').execute()
-    # labels = results.get('labels', [])
 
-    #Get messages
+    # MAIL CHECKHER ================================================================
+
+    # get mails via gmail api
     results = service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
     messages = results.get('messages', [])
 
     # mail number
     mail_nr = 0
 
+    # variabel for how many mails we want to search through
     message_count = int(input("Hur många mails vill du söka igenom? "))
+    # if 0 mails are chosen
     if not messages:
-        print('No messages')
+        print('Inga mail i inkorgen')
     else:
+        # looks through the email inbox for mails "message_count" amount of times
         for message in messages[:message_count]:
+            # gets the email id's in full format so we can extraqct information via the gmail api
+            msg = service.users().messages().get(userId='me', id=message['id'], format='full', metadataHeaders=None).execute()
+            # gets the headers of the email in a variable
+            headers = msg["payload"]["headers"]
+            # from headers gets the sender email, who it was from 
+            from_ = [i['value'] for i in headers if i["name"]=="From"]
+            # from headers gets the subject of the email
+            subject = [i['value'] for i in headers if i["name"]=="Subject"]
+            # keeps count of the current email
             mail_nr += 1
-            msg = service.users().messages().get(userId='me', id=message['id'], format='raw').execute()
-            print("="*100)
-            print("\nMail:", mail_nr)
-            datum = int(msg['internalDate'])
-            datum /= 1000
-            print("Datum:", datetime.fromtimestamp(datum).strftime('%Y-%m-%d %H:%M:%S'))
-            print("Medelande:", msg['snippet'])
-        
-
-            print("\n")
-            time.sleep(2)
-
+            # if the email is from the security system email print it's information
+            if from_ == ['Python Ormarna <python.ormar@gmail.com>']:
+                # gets the email in raw format via gmail api
+                rawmsg = service.users().messages().get(userId="me", id=message["id"], format="raw", metadataHeaders=None).execute()
+                print("="*100)
+                print("\nMail:", mail_nr)
+                print("Detta mail är från erat säkerhetssystem")
+                # variable the UNIX time of when the email was sent
+                datum = int(msg['internalDate'])
+                datum /= 1000
+                # prints the date and time when the email was revived in local y/m/d/h/m/s
+                print("Mottaget:", datetime.fromtimestamp(datum).strftime('%Y-%m-%d %H:%M:%S'))
+                print("Från:", from_)
+                print("Ämne:", subject)
+                # prints a snippet from the email
+                print(msg['snippet'])
+                print("\n")
+            else:
+                print("="*100)
+                print("\nMail:", mail_nr)
+                print("Detta mail är INTE från erat säkerhetssystem\n")
+            time.sleep(1)
+        print("Inga fler mail hittades")
 if __name__ == '__main__':
     main()
