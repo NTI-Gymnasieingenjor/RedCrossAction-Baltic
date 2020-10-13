@@ -8,6 +8,7 @@ import time
 from datetime import datetime
 import sys
 import pytz
+import base64
 
 
 # If modifying these scopes, delete the file token.pickle.
@@ -46,22 +47,23 @@ def main():
     results = service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
     messages = results.get('messages', [])
 
-    # if not labels:
-    message_count = int(input("How many?"))
+    # mail number
+    mail_nr = 0
+
+    message_count = int(input("Hur många mails vill du söka igenom? "))
     if not messages:
         print('No messages')
     else:
-        print('Messages: ')
-
-
         for message in messages[:message_count]:
-            msg = service.users().messages().get(userId='me', id=message['id']).execute()
+            mail_nr += 1
+            msg = service.users().messages().get(userId='me', id=message['id'], format='raw').execute()
             print("="*100)
-            bruh = int(msg['internalDate'])
-            bruh /= 1000
-            print("Datum:", datetime.fromtimestamp(bruh).strftime('%Y-%m-%d %H:%M:%S'))
-
+            print("\nMail:", mail_nr)
+            datum = int(msg['internalDate'])
+            datum /= 1000
+            print("Datum:", datetime.fromtimestamp(datum).strftime('%Y-%m-%d %H:%M:%S'))
             print("Medelande:", msg['snippet'])
+        
 
             print("\n")
             time.sleep(2)
