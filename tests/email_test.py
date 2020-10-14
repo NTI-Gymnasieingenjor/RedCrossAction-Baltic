@@ -25,6 +25,8 @@ messages = int(messages[0])
 # mail number
 mail_nr = 0
 
+N = 2
+
 try:
     for i in range(messages, messages-N, -1):
         # fetch the email message by ID

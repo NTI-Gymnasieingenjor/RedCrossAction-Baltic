@@ -5,6 +5,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import time
+import base64
+import email
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
@@ -54,6 +56,7 @@ def main():
             print(msg['snippet'])
             print("\n")
             time.sleep(2)
+
 
 if __name__ == '__main__':
     main()
