@@ -6,11 +6,34 @@
 
 ## Development Enviroment Standard
 
-*Visual Studio Code-plugins:*
-- *Live Server*
+**Visual Studio Code-plugins:**
 - *Live Share*
 - *Python Extension Pack*
-- *Beautify*
+- *Code Spell Checker*
+
+**Python 3.8.5-modules**
+
+**from** *import*
+
+- *pickle*
+- *os.path*
+- *os*
+- *base64*
+- *time*
+- *csv*
+- *sys*
+- *pytz*
+- **datetime** *datetime*
+- **googleapiclient.discovery** *build*
+- **google_auth_oauthlib.flow** *InstalledAppFlow*
+- **google.auth.transport.requests** *Request*
+- **__future__** *Request*
+- **email.mime.text** *MIMEText*
+- **email** *errors*
+- **selenium** *webdriver*
+- **selenium.webdriver.support.ui** *Select*
+
+*https://developers.google.com/gmail/api/quickstart/python*
 
 ## Coding Standard
 
