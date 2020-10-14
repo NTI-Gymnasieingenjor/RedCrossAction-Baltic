@@ -1,5 +1,17 @@
 # RedCrossAction-Baltic
 
+## Programming Languages
+
+- *Python 3.8.5*
+
+## Development Enviroment Standard
+
+*Visual Studio Code-plugins:*
+- *Live Server*
+- *Live Share*
+- *Python Extension Pack*
+- *Beautify*
+
 ## Coding Standard
 
 **File name structure:** this_is_how_you_do (underscore)
