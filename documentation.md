@@ -8,12 +8,12 @@ In this project we make use of two branches: `master` and `development`. This is
 
 #
 
-Email tests are for checking if email is existing and is correctly witted. (Right now we need to start them manually before we push)
+Email tests are used for checking if an email exists and is correctly written. (We currently need to start them manually before we push)
 
     How to start email tests with Selenium in Python:
 
-        - Install Python 3.8.5 (during installation check box Add Python to path, then reboot your system)
+        - Install Python 3.8.5 (during installation check the box "Add Python to path", then reboot your system)
 
-        - If you want to test email from contacs.csv (execute emailvalidaion.py in your code environment)
+        - If you want to test emails from contacs.csv (execute emailvalidaion.py in your code environment)
 
-        - The test passes when you get message "(yourEmail) is correct" otherwise it will show specific error
+        - If you get the message "(yourEmail) is correct" the test has passed. Otherwise it'll give you an error showing you what's wrong.
