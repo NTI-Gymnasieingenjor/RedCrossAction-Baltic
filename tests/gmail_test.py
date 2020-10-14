@@ -8,6 +8,7 @@ import pickle
 import os.path
 import sys
 import pytz
+import os
 
 # LOGIN ======================================================================
 
@@ -22,20 +23,28 @@ def main():
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
+    scores = {} # scores is an empty dict already
+
+    if os.path.getsize('token.pickle') > 0:      
+        with open('token.pickle', "rb") as f:
+            unpickler = pickle.Unpickler(f)
+        # if file is not empty scores will be equal
+        # to the value unpickled
+            scores = unpickler.load()
+        if os.path.exists('token.pickle'):
+            with open('token.pickle', 'rb') as token:
+                creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    'credentials.json', SCOPES)
+                creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open('token.pickle', 'wb') as token:
+                pickle.dump(creds, token)
 
     # Startar Gmail v1 med den som är inloggad
     service = build('gmail', 'v1', credentials=creds)
@@ -71,7 +80,7 @@ def main():
             # keeps count of the current email
             mail_nr += 1
             # if the email is from the security system email print it's information
-            if from_ == ['Python Ormarna <python.ormar@gmail.com>']:
+            if from_ == ['Python Ormarna <python.ormar@gmail.com>'] or from_ == ['python.ormar@gmail.com']:
                 # gets the email in raw format via gmail api
                 rawmsg = service.users().messages().get(userId="me", id=message["id"], format="raw", metadataHeaders=None).execute()
                 print("="*100)
