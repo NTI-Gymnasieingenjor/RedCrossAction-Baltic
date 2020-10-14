@@ -21,8 +21,7 @@ def main():
     """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
+    # created automatically when the authorization flow completes for the first time.
     scores = {} # scores is an empty dict already
 
     if os.path.getsize('token.pickle') > 0:      
@@ -46,7 +45,7 @@ def main():
             with open('token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
-    # Startar Gmail v1 med den som är inloggad
+    # Starts Gmail V1 with logged in user
     service = build('gmail', 'v1', credentials=creds)
  
 # ================================================================================== 

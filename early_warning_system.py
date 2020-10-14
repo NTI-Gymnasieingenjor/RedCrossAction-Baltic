@@ -9,19 +9,18 @@ from google.auth.transport.requests import Request
 from email.mime.text import MIMEText
 from email import errors
 import base64
+# File with emails
+import csv
+
+# LOGIN ======================================================================
 
 # If modifying these scopes, delete the file token.pickle.
-# SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
-"""Shows basic usage of the Gmail API.
-Lists the user's Gmail labels.
-"""
 global msg
 creds = None
 # The file token.pickle stores the user's access and refresh tokens, and is
-# created automatically when the authorization flow completes for the first
-# time.
+# created automatically when the authorization flow completes for the first time.
 if os.path.exists('token.pickle'):
     with open('token.pickle', 'rb') as token:
         creds = pickle.load(token)
@@ -37,25 +36,46 @@ if not creds or not creds.valid:
     with open('token.pickle', 'wb') as token:
         pickle.dump(creds, token)
 
+# Starts Gmail V1 with logged in user
 service = build('gmail', 'v1', credentials=creds)
 
+# ==================================================================================
+
+# MAIL SENDER ================================================================
+
 def send_message():
-    gmail_to = 'python.ormar@gmail.com'
-    gmail_subject = 'Python gmail API email'
-    gmail_content = 'POG!'
+    # Opens file with emails
+    with open("contacts.csv") as file:
+        reader = csv.reader(file)
+        # Skip header row
+        next(reader)
+        # Loops through emails file
+        for email in reader:
+            # Email content
+            gmail_content = 'Meddelande från python gmail API!'
+            # Email subject
+            gmail_subject = 'Python gmail API email'
+            # Revomes brackets and quotations
+            email = "".join(email)
+            print("\nEmail: " + email)
 
-    message = MIMEText(gmail_content)
-    message ['to'] = gmail_to
-    message ['subject'] = gmail_subject
-    # This is how gmail api reads messages
-    raw = base64.urlsafe_b64encode(message.as_bytes())
-    raw = raw.decode()
-    body = {'raw': raw}
+            # Uses email preferences
+            message = MIMEText(gmail_content)
+            message ['subject'] = gmail_subject
+            message ['to'] = email
 
-    try:
-        message = (service.users().messages().send(userId='me', body=body).execute())
-        print("Din meddelande är skickat!")
-    except errors.MessageError as error:
-        print('An error occurred: %s' % error)
+            # Gmail API reads messages
+            raw = base64.urlsafe_b64encode(message.as_bytes())
+            raw = raw.decode()
+            body = {'raw': raw}
 
+            # Sends the message
+            try:
+                message = (service.users().messages().send(userId='me', body=body).execute())
+                print("Ditt meddelande är skickat!")
+            # If any error happends
+            except errors.MessageError as error:
+                print('An error occurred: %s' % error)
+
+# Starts function
 send_message()
