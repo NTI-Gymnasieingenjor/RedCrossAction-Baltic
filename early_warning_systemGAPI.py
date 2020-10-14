@@ -40,14 +40,12 @@ if not creds or not creds.valid:
 service = build('gmail', 'v1', credentials=creds)
 
 def send_message():
-    gmail_from = 'python.ormar@gmail.com'
     gmail_to = 'python.ormar@gmail.com'
     gmail_subject = 'Python gmailAPI email'
-    gmail_content = 'Test'
+    gmail_content = 'Det är medelandet'
 
     message = MIMEText(gmail_content)
     message ['to'] = gmail_to
-    message ['from'] = gmail_from
     message ['subject'] = gmail_subject
     # This is how gmail api reads messages
     raw = base64.urlsafe_b64encode(message.as_bytes())
