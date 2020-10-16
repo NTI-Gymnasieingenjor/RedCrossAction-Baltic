@@ -11,7 +11,7 @@
 - *Python Extension Pack*
 - *Code Spell Checker*
 
-**Python modules**
+**Python 3.8.5 modules**
 
 - **import** *pickle*
 - **import** *os.path*
