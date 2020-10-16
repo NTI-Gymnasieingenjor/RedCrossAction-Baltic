@@ -1,14 +1,17 @@
 from __future__ import print_function
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+
 import pickle
 import os.path
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
 import time
-from google.auth.transport.requests import Request
+
 # For send message function
 from email.mime.text import MIMEText
 from email import errors
 import base64
+
 # File with emails
 import csv
 
@@ -52,12 +55,12 @@ def send_message():
         # Loops through emails file
         for email in reader:
             # Email content
-            gmail_content = 'Systemet har känt av en oroväckande mängd Tweet med #red_cross_warning_system, vänligen inspektera.'
+            gmail_content = 'Systemet har känt av ett tweet med hashtagen "#rödakorsethjälp", vänligen inspektera.'
             # Email subject
             gmail_subject = 'Systemvarning från Twitter!'
             # Revomes brackets and quotations
             email = "".join(email)
-            print("\nEmail: " + email)
+            print("\nSkickar till: " + email)
 
             # Uses email preferences
             message = MIMEText(gmail_content)
@@ -72,7 +75,7 @@ def send_message():
             # Sends the message
             try:
                 message = (service.users().messages().send(userId='me', body=body).execute())
-                print("Ditt meddelande är skickat!")
+                print("Ett email har skickats!")
             # If any error happends
             except errors.MessageError as error:
                 print('An error occurred: %s' % error)
