@@ -6,8 +6,6 @@ In this project we make use of two branches: `master` and `development`. This is
 
 ## Run email tests/validation
 
-#
-
 Email tests are used for checking if an email exists and is correctly written. (We currently need to start them manually before we push)
 
     How to start email tests with Selenium in Python:
@@ -20,9 +18,7 @@ Email tests are used for checking if an email exists and is correctly written. (
 
 ## Python pip install
 
-#
-
-Modules needed to pip install to successful run the script.
+Modules needed to pip install to successfully run the script.
 
     Install the library by writing pip command in your terminal:
 
