@@ -17,9 +17,6 @@ Email tests are used for checking if an email exists and is correctly written.
         - If you want to test emails from contacts.csv (execute email_validation.py in your code environment)
 
         - If you get the message "(yourEmail) is correct" the test has passed. Otherwise it'll give you an error showing you what's wrong
-<<<<<<< HEAD
-=======
-
 
 ## Running the program
 
@@ -49,4 +46,3 @@ Before you can properly run the program you first need to make some minor change
         - Once you have access navigate to the developer portal page
         
         - Create a project and request for API keys and token
->>>>>>> development_readme
