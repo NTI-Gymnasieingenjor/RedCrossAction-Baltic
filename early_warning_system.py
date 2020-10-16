@@ -54,7 +54,7 @@ def send_message():
 
     try:
         message = (service.users().messages().send(userId='me', body=body).execute())
-        print("Din meddelande är skickat!")
+        print("Ditt meddelande är skickat!")
     except errors.MessageError as error:
         print('An error occurred: %s' % error)
 
