@@ -11,27 +11,25 @@
 - *Python Extension Pack*
 - *Code Spell Checker*
 
-**Python 3.8.5-modules**
+**Python modules**
 
-**from** *import*
-
-- *pickle*
-- *os.path*
-- *os*
-- *base64*
-- *time*
-- *csv*
-- *sys*
-- *pytz*
-- **datetime** *datetime*
-- **googleapiclient.discovery** *build*
-- **google_auth_oauthlib.flow** *InstalledAppFlow*
-- **google.auth.transport.requests** *Request*
-- **__future__** *Request*
-- **email.mime.text** *MIMEText*
-- **email** *errors*
-- **selenium** *webdriver*
-- **selenium.webdriver.support.ui** *Select*
+- **import** *pickle*
+- **import** *os.path*
+- **import** *os*
+- **import** *base64*
+- **import** *time*
+- **import** *csv*
+- **import** *sys*
+- **import** *pytz*
+- **from** *datetime* **import** *datetime*
+- **from** *googleapiclient.discovery* **import** *build*
+- **from** *google_auth_oauthlib.flow* **import** *InstalledAppFlow*
+- **from** *google.auth.transport.requests* **import** *Request*
+- **from** *`__future__`* **import** *Request*
+- **from** *email.mime.text* **import** *MIMEText*
+- **from** *email* **import** *error*
+- **from** *selenium* **import** *webdriver*
+- **from** *selenium.webdriver.support.ui* **import** *Select*
 
 *https://developers.google.com/gmail/api/quickstart/python*
 
